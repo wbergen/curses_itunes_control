@@ -1,0 +1,4 @@
+#!/bin/bash
+
+osascript -e 'tell application "iTunes"' -e "next track" -e "end tell"
+./get_info

@@ -1,0 +1,12 @@
+#!/bin/bash
+
+# volume captured as precentage
+# setting takes a decimal between 0,7
+# 100% == 7, 0% == 0
+inc=$(echo "100/7" | bc -l)
+
+# Get the current vol:
+cur_percent=$(osascript -e 'get volume settings' | grep -oE "[0-9]{1,3}" | head -1)
+cur_v=$(echo "$cur_percent/$inc" | bc -l)
+
+printf "%0.0f%%\n" $(echo "$cur_v*$inc" | bc)

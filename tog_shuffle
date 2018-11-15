@@ -1,0 +1,22 @@
+#!/bin/bash
+
+
+cur=$(osascript -e 'tell application "iTunes"' -e 'shuffle enabled' -e 'end tell')
+# echo $cur
+
+
+if [[ $cur == "true" ]]; then
+	# echo "Shuffle on, setting off..."
+	osascript -e 'tell application "iTunes"' -e 'set shuffle enabled to False' -e 'end tell'
+	
+else
+	# echo "Shuffle off, setting on..."
+	osascript -e 'tell application "iTunes"' -e 'set shuffle enabled to True' -e 'end tell'
+	
+fi
+
+
+
+
+
+#osascript -e 'tell application iTunes' -e set shuffle enabled to False -e end tell

@@ -1,0 +1,15 @@
+#!/bin/bash
+
+cur=$(osascript -e 'tell application "iTunes" to player state as string')
+# echo $cur
+
+
+# is this sufficient? What other values am i gonna get?
+if [[ $cur == "playing" ]]; then
+	# echo "iTunes Playing.  Pausing..."
+	osascript -e 'tell application "iTunes"' -e "pause" -e "end tell"
+	
+elif [[ $cur == "stopped" || $cur == "paused" ]]; then
+	# echo "iTunes Paused/Stopped.  Playing..."
+	osascript -e 'tell application "iTunes"' -e "play" -e "end tell"	
+fi

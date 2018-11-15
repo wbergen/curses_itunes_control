@@ -1,0 +1,10 @@
+#!/bin/bash
+# osascript -e 'tell application "iTunes" to player state as string'
+
+
+osascript -e 'tell application "iTunes"' \
+-e 'set player_state to {"shuf","p_state"}' \
+-e 'set item 1 of player_state to shuffle enabled' \
+-e 'set item 2 of player_state to player state as string' \
+-e 'player_state' \
+-e 'end tell' 2>/dev/null

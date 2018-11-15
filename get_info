@@ -1,0 +1,9 @@
+#!/bin/bash
+
+osascript -e 'tell application "iTunes"' \
+-e 'set current_track to {"name","artist","album"}' \
+-e 'set item 1 of current_track to name of current track' \
+-e 'set item 2 of current_track to artist of current track' \
+-e 'set item 3 of current_track to album of current track' \
+-e 'current_track' \
+-e 'end tell' 2>/dev/null

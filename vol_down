@@ -1,0 +1,25 @@
+#!/bin/bash
+
+# volume captured as precentage
+# setting takes a decimal between 0,7
+# 100% == 7, 0% == 0
+inc=$(echo "100/7" | bc -l)
+
+# Get the current vol:
+cur_percent=$(osascript -e 'get volume settings' | grep -oE "[0-9]{1,3}" | head -1)
+cur_v=$(echo "$cur_percent/$inc" | bc -l)
+
+# Decrement by .5, min 0:
+new=$(echo "$cur_v - .5" | bc -l)
+if (( $(echo "$new < 0" | bc -l) )); then
+	new=0
+fi
+
+# Set new volume:
+osascript -e 'set volume '$new
+#osascript -e $(echo -n "set volume $new")
+
+# Print change if 'quiet flag' not set:
+if [[ $1 != "-q" ]]; then
+	printf "%0.0f%% -> %0.0f%%\n" $(echo "$cur_v*$inc" | bc) $(echo "$new*$inc" | bc)
+fi
